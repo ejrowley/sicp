@@ -1,0 +1,75 @@
+* Structure and Interpretation of Computer Programs
+** The Elements of Programming
+*** 1.1.1 Expressions
+
+**** You type an /expression/ into an interpreter and it responds by displaying the result of /evaluating/ the expression. A number is a primative expression which evaluates to itself.
+
+#+BEGIN_SRC scheme
+486
+#+END_SRC
+
+#+RESULTS:
+: 486
+
+
+**** Number expressions can be combined together with an expression which represents a primative procedure which forms a /compound/ expression.
+
+#+BEGIN_SRC scheme
+(* 4 12)
+#+END_SRC 
+
+#+RESULTS:
+: 48
+
+
+**** Expressions formed of primatives combinded to gether are called /combinations/. The left most element in the list is called the operator and the other elements are operands. The operator appears first is called /prefix notation/. Prefix is useful because it removes ambiguity and allows combinations to /nested/
+
+#+BEGIN_SRC scheme
+(+ (* 2 5) (* -2 6 3))
+#+END_SRC
+
+#+RESULTS:
+: -26
+
+ 
+
+*** 1.1.2 Naming and the Environment
+
+**** An important aspect of programming languages is the ability to refer to computational objects by name. A name identifies a /variable/ whose /value/ is the computational object. In the Scheme dialect things are named with define
+
+#+BEGIN_SRC scheme
+(define something 42)
+something
+
+#+END_SRC
+
+#+RESULTS:
+: 42
+
+#+BEGIN_SRC scheme
+(define pi 3.141)
+(define radius 10)
+(define circumference (* 2 pi radius))
+circumference
+
+#+END_SRC
+
+#+RESULTS:
+: 62.82
+
+**** define allows us to use names to refer to computational objects and the combinations allowing use to build computational objects of increasing complexity.
+
+*** 1.1.3 Evaluating Combinations
+
+**** Evaluating combinations consists of two steps, first evaluate all sub expressions. Second apply the operator (the left most subexpression) to the remaining operands. These simple rules illistrates an import process, /recursion/ The evaluation of the rule requires the rule to be applied as one of it's steps. So given a combination which consists of two sub-combinations the same rule has to be applied to the sub combinations first. Once the sub combinations are evaluated the parent combination can be evaluated.
+#+BEGIN_SRC scheme
+(+ (+ 4 2) (+ 6 8))
+#+END_SRC
+
+#+RESULTS:
+: 20
+
+**** The evaluation rules does not handle definiations (define x 10) is not a combination, it is an example of /special form/ which are exceptions to the general rule. Each special form has its own evaluation rule.
+
+*** 1.1.4 Compound Procedures
+
